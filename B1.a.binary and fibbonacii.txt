@@ -1,0 +1,58 @@
+def binary(arr, roll):
+    i, j = 0, len(arr) - 1
+    while i <= j:
+        mid = (i + j) // 2
+        if arr[mid] == roll:
+            return True
+        elif arr[mid] < roll:
+            i = mid + 1
+        else:
+            j = mid - 1
+    return False
+
+def fibonacci(arr, roll):
+    n = len(arr)
+    a = 0
+    b = 1
+    f = a + b
+
+    while f < n:
+        b = a
+        a = f
+        f = a + b
+    offset = -1
+    while f > 1:
+        i = min(offset + b, n - 1)
+
+        if arr[i] < roll:
+            f = a
+            a = b
+            b = f - a
+            offset=i
+        elif arr[i] > roll:
+            f = b
+            a = a - b
+            b = f - a
+        else:
+            return True
+    if a and offset + 1 < n and arr[offset + 1] == roll:
+        return True
+
+    return False
+    
+def generate_roll(n):
+    return list(range(1000,1000+n))
+    
+def main():
+    n=10
+    roll=generate_roll(n)
+    print("sorted roll no of students who attended :",roll)
+    roll_search=int(input("Enter no to search :"))
+    
+    found=binary(roll,roll_search)
+    print(f"binary search : Roll no {roll_search} {'found'if found else 'not found'}")
+    
+    found=fibonacci(roll,roll_search)
+    print(f"fibonacci search : Roll no {roll_search} {'found'if found else 'not found'}")
+    
+main()

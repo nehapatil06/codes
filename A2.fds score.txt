@@ -1,0 +1,54 @@
+def calculate_average(marks):
+    total = 0
+    count = 0
+    for mark in marks:
+        if mark != -1:  
+            total += mark
+            count += 1
+    return total / count if count > 0 else 0
+
+def find_highest_and_lowest(marks):
+    highest = -1
+    lowest = 101
+    for mark in marks:
+        if mark != -1:  
+            if mark > highest:
+                highest = mark
+            if mark < lowest:
+                lowest = mark
+    return highest, lowest
+
+def count_absent_students(marks):
+    return marks.count(-1) 
+
+def find_highest_frequency_mark(marks):
+    freq = {}
+    for mark in marks:
+        if mark != -1:  
+            freq[mark] = freq.get(mark, 0) + 1
+    most_frequent_mark = max(freq, key=freq.get) if freq else None
+    return most_frequent_mark
+
+def main():
+    n = int(input("Enter the number of students: "))
+    marks = []
+    
+    print("Enter the marks (enter -1 for absent students):")
+    for i in range(n):
+        mark = int(input(f"Student {i + 1}: "))
+        marks.append(mark)
+    
+    # Calculate and display results
+    average_score = calculate_average(marks)
+    highest, lowest = find_highest_and_lowest(marks)
+    absent_count = count_absent_students(marks)
+    highest_frequency_mark = find_highest_frequency_mark(marks)
+    
+    print(f"\nAverage score of the class: {average_score:.2f}")
+    print(f"Highest score: {highest}")
+    print(f"Lowest score: {lowest}")
+    print(f"Number of students absent: {absent_count}")
+    print(f"Mark with the highest frequency: {highest_frequency_mark}")
+
+if __name__ == "__main__":
+    main()

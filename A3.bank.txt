@@ -1,0 +1,31 @@
+bal = 0 
+
+while True:
+    t = input("Enter Transaction \nE - Exit\nD - Deposit Amt\nW - Withdraw Amt:\nTransaction: ")
+   
+    if t[0] == 'E':
+        break
+
+    
+    transaction_type = t[0]  
+    if len(t) > 1:
+        amount = int(t[1:]) 
+    else:
+        print("Invalid input. Please enter a valid transaction.")
+        continue
+
+    if transaction_type == 'D':  # Deposit
+        bal = bal + amount
+        print(f"Deposited {amount}. Current Balance: {bal}")
+
+    elif transaction_type == 'W':  # Withdraw
+        if bal >= amount:  # Check if sufficient balance
+            bal = bal - amount
+            print(f"Withdrew {amount}. Current Balance: {bal}")
+        else:
+            print(f"Insufficient balance for withdrawal of {amount}. Current Balance: {bal}")
+
+    else:
+        print("Invalid transaction type. Please enter 'D' for deposit, 'W' for withdrawal, or 'E' to exit.")
+
+print(f"Final Balance: {bal}")
